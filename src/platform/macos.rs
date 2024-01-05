@@ -14,7 +14,19 @@ impl ClipboardProvider for clipboard_macos::Clipboard {
         self.read()
     }
 
+    fn read_mime(&self, _mime: mime::Mime) -> Result<String, Box<dyn Error>> {
+        Err("read_mime not implemented".into())
+    }
+
     fn write(&mut self, contents: String) -> Result<(), Box<dyn Error>> {
         self.write(contents)
+    }
+
+    fn write_mime(
+        &mut self,
+        _mime: mime::Mime,
+        _contents: String,
+    ) -> Result<(), Box<dyn Error>> {
+        Err("write_mime not implemented".into())
     }
 }

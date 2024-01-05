@@ -15,8 +15,23 @@ impl ClipboardProvider for Dummy {
         Err(Box::new(Error::Unimplemented))
     }
 
+    fn read_mime(
+        &self,
+        _mime: mime::Mime,
+    ) -> Result<String, Box<dyn std::error::Error>> {
+        Err(Box::new(Error::Unimplemented))
+    }
+
     fn write(
         &mut self,
+        _contents: String,
+    ) -> Result<(), Box<dyn std::error::Error>> {
+        Err(Box::new(Error::Unimplemented))
+    }
+
+    fn write_mime(
+        &mut self,
+        _mime: mime::Mime,
         _contents: String,
     ) -> Result<(), Box<dyn std::error::Error>> {
         Err(Box::new(Error::Unimplemented))

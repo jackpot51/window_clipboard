@@ -28,8 +28,20 @@ impl ClipboardProvider for wayland::Clipboard {
         self.read()
     }
 
+    fn read_mime(&self, _mime: mime::Mime) -> Result<String, Box<dyn Error>> {
+        Err("read_mime not implemented".into())
+    }
+
     fn write(&mut self, contents: String) -> Result<(), Box<dyn Error>> {
         self.write(contents)
+    }
+
+    fn write_mime(
+        &mut self,
+        _mime: mime::Mime,
+        _contents: String,
+    ) -> Result<(), Box<dyn Error>> {
+        Err("write_mime not implemented".into())
     }
 }
 
@@ -38,7 +50,19 @@ impl ClipboardProvider for x11::Clipboard {
         self.read().map_err(Box::from)
     }
 
+    fn read_mime(&self, _mime: mime::Mime) -> Result<String, Box<dyn Error>> {
+        Err("read_mime not implemented".into())
+    }
+
     fn write(&mut self, contents: String) -> Result<(), Box<dyn Error>> {
         self.write(contents).map_err(Box::from)
+    }
+
+    fn write_mime(
+        &mut self,
+        _mime: mime::Mime,
+        _contents: String,
+    ) -> Result<(), Box<dyn Error>> {
+        Err("write_mime not implemented".into())
     }
 }
