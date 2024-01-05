@@ -12,6 +12,7 @@ keywords = ["clipboard", "window", "ui", "gui", "raw-window-handle"]
 categories = ["gui"]
 
 [dependencies]
+mime = "0.3"
 raw-window-handle = "0.5"
 thiserror = "1.0"
 
@@ -27,7 +28,8 @@ clipboard_wayland = { version = "0.2", path = "./wayland" }
 
 [dev-dependencies]
 rand = "0.8"
-winit = "0.28"
+softbuffer = { git = "https://github.com/pop-os/softbuffer.git", tag = "v0.3-cosmic" }
+winit = { git = "https://github.com/pop-os/winit.git" }
 
 [workspace]
 members = [
