@@ -12,9 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-use std::error::Error;
-use std::ffi::c_void;
-use std::sync::{Arc, Mutex};
+use std::{
+    error::Error,
+    ffi::c_void,
+    sync::{Arc, Mutex},
+};
 
 pub struct Clipboard {
     context: Arc<Mutex<smithay_clipboard::Clipboard>>,

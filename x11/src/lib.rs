@@ -3,17 +3,23 @@ mod error;
 
 pub use error::Error;
 
-use x11rb::connection::Connection as _;
-use x11rb::errors::ConnectError;
-use x11rb::protocol::xproto::{self, Atom, AtomEnum, EventMask, Window};
-use x11rb::protocol::Event;
-use x11rb::rust_connection::RustConnection as Connection;
-use x11rb::wrapper::ConnectionExt;
+use x11rb::{
+    connection::Connection as _,
+    errors::ConnectError,
+    protocol::{
+        xproto::{self, Atom, AtomEnum, EventMask, Window},
+        Event,
+    },
+    rust_connection::RustConnection as Connection,
+    wrapper::ConnectionExt,
+};
 
-use std::collections::HashMap;
-use std::sync::{Arc, RwLock};
-use std::thread;
-use std::time::{Duration, Instant};
+use std::{
+    collections::HashMap,
+    sync::{Arc, RwLock},
+    thread,
+    time::{Duration, Instant},
+};
 
 const POLL_DURATION: std::time::Duration = Duration::from_micros(50);
 
@@ -104,9 +110,13 @@ impl Clipboard {
             selection,
             target,
             property,
-            x11rb::CURRENT_TIME, // FIXME ^
-                                 // Clients should not use CurrentTime for the time argument of a ConvertSelection request.
-                                 // Instead, they should use the timestamp of the event that caused the request to be made.
+            x11rb::CURRENT_TIME, /* FIXME ^
+                                  * Clients should not use CurrentTime for
+                                  * the time argument of a ConvertSelection
+                                  * request.
+                                  * Instead, they should use the timestamp
+                                  * of the event that caused the request to
+                                  * be made. */
         )?;
         let _ = self.reader.connection.flush()?;
 
@@ -166,8 +176,9 @@ impl Clipboard {
                         continue;
                     };
 
-                    // Note that setting the property argument to None indicates that the
-                    // conversion requested could not be made.
+                    // Note that setting the property argument to None indicates
+                    // that the conversion requested could
+                    // not be made.
                     if event.property == AtomEnum::NONE.into() {
                         break;
                     }

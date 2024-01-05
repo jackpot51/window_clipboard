@@ -15,14 +15,17 @@ fn main() {
 
     let clipboard = Clipboard::connect(&window).expect("Connect to clipboard");
 
-    event_loop.run(move |event, _, control_flow| match event {
-        Event::MainEventsCleared => {
-            println!("{:?}", clipboard.read());
+    event_loop.run(move |event, _, control_flow| {
+        println!("{:?}", event);
+        match event {
+            Event::MainEventsCleared => {
+                println!("{:?}", clipboard.read());
+            }
+            Event::WindowEvent {
+                event: WindowEvent::CloseRequested,
+                window_id,
+            } if window_id == window.id() => *control_flow = ControlFlow::Exit,
+            _ => *control_flow = ControlFlow::Wait,
         }
-        Event::WindowEvent {
-            event: WindowEvent::CloseRequested,
-            window_id,
-        } if window_id == window.id() => *control_flow = ControlFlow::Exit,
-        _ => *control_flow = ControlFlow::Wait,
     });
 }
