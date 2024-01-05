@@ -1,0 +1,4 @@
+[submodule "wayland/smithay-clipboard"]
+	path = wayland/smithay-clipboard
+	url = https://github.com/jackpot51/smithay-clipboard.git
+	branch = master
